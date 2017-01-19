@@ -1,15 +1,21 @@
+#################################################
+# This script is an entrypoint of Agent Image   #
+# it will be called from init.ps1, which is     #
+# a part of DependencyImage                     #
+#################################################
+
 param(
-    [string]$serverUrl,
-    [string]$dockerAgentContainer,
-    [string]$agentPool,
-    [string]$personalAccessToken
+    [string]$agent_serverurl,
+    [string]$agent_name,
+    [string]$agent_pool,
+    [string]$agent_token
 )
 
 $currentPath = (Get-Location).Path
 
 $pinfo = New-Object System.Diagnostics.ProcessStartInfo
 $pinfo.FileName = "c:\agent\config.cmd"
-$pinfo.Arguments = "--unattended", "--url $serverUrl", "--agent $dockerAgentContainer", "--pool $agentPool", "--auth PAT", "--token $personalAccessToken", "--runasservice"
+$pinfo.Arguments = "--unattended", "--url $agent_serverurl", "--agent $agent_name", "--pool $agent_pool", "--auth PAT", "--token $agent_token", "--runasservice"
 $pinfo.CreateNoWindow = $true
 $pinfo.UseShellExecute = $false
 $pinfo.CreateNoWindow = $true
@@ -23,4 +29,4 @@ $process.WaitForExit()
 $process.StandardOutput.ReadToEnd()
 $process.StandardError.ReadToEnd()
 
-while ($true) { sleep 100 } 
+while ($true) { Start-Sleep 10000 } 
