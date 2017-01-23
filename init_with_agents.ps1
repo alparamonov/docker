@@ -56,7 +56,7 @@ switch ($AgentType)
             Write-Output 'Get Configure-Agent.ps1 script for ENTRYPOINT'
             Invoke-WebRequest -Uri 'https://raw.githubusercontent.com/alparamonov/docker/master/ConfigureAgent.ps1' -OutFile "C:\cfg\Configure-Agent.ps1"
 
-            DownloadAndUnzipAgent('https://github.com/Microsoft/vsts-agent/releases/download/v2.110.0/vsts-agent-win7-x64-2.110.0.zip')
+            DownloadAndUnzipAgent('https://github.com/Microsoft/vsts-agent/releases/download/v2.111.1/vsts-agent-win7-x64-2.111.1.zip')
 
             & "$env:SystemDrive\cfg\Configure-Agent.ps1" -agent_username $agent_username `
                 -agent_token $agent_token `
