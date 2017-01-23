@@ -42,7 +42,7 @@ function DownloadAndUnzipAgent ([string]$url)
     Get-Date -Format 'dd.MM.yyyy H:mm:ss'
     Write-Output 'Get and extract VSTS agent'
     Invoke-WebRequest -Uri $url -OutFile "C:\install\agent.zip"
-    Start-Process "$env:ProgramFiles\7-Zip\7z.exe" -ArgumentList 'e -y -oC:\agent C:\install\agent.zip' -NoNewWindow -Wait
+    Start-Process "$env:ProgramFiles\7-Zip\7z.exe" -ArgumentList 'x -y -oC:\agent C:\install\agent.zip' -NoNewWindow -Wait
     Get-ChildItem 'C:\agent'
     Get-Date -Format 'dd.MM.yyyy H:mm:ss'
     Write-Output 'Remove all installation files'
