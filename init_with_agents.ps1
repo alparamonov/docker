@@ -20,7 +20,6 @@ param (
     [string]$AgentType,
 
     [string]$agent_username,  
-    [string]$agent_password,
     [string]$agent_name, 
     [string]$agent_serverurl,
     [string]$agent_pool,
@@ -60,7 +59,7 @@ switch ($AgentType)
             DownloadAndUnzipAgent('https://github.com/Microsoft/vsts-agent/releases/download/v2.110.0/vsts-agent-win7-x64-2.110.0.zip')
 
             & "$env:SystemDrive\cfg\Configure-Agent.ps1" -agent_username $agent_username `
-                -agent_password $agent_password `
+                -agent_token $agent_token `
                 -agent_name $agent_name `
                 -agent_serverurl $agent_serverurl `
                 -agent_pool $agent_pool 
