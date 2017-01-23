@@ -2,6 +2,9 @@
 # This script is an entrypoint of Agent Image   #
 # it will be called from init.ps1, which is     #
 # a part of DependencyImage                     #
+#                                               #
+# THIS FILE WILL BE DOWNLOADED FROM GITHUB      #
+#                                               #
 #################################################
 
 param(
@@ -13,9 +16,11 @@ param(
 
 $currentPath = (Get-Location).Path
 
+$encToken = [Convert]::ToBase64String([Text.Encoding]::ASCII.GetBytes(("{0}:{1}" -f "", $agent_token)))
+
 $pinfo = New-Object System.Diagnostics.ProcessStartInfo
 $pinfo.FileName = "c:\agent\config.cmd"
-$pinfo.Arguments = "--unattended", "--url $agent_serverurl", "--agent $agent_name", "--pool $agent_pool", "--auth PAT", "--token $agent_token", "--runasservice"
+$pinfo.Arguments = "--unattended", "--url $agent_serverurl", "--agent $agent_name", "--pool $agent_pool", "--auth PAT", "--token $encToken", "--runasservice"
 $pinfo.CreateNoWindow = $true
 $pinfo.UseShellExecute = $false
 $pinfo.CreateNoWindow = $true
