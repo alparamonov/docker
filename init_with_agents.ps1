@@ -20,7 +20,7 @@ param (
     [string]$AgentType,
 
     [string]$agent_username,  
-    [SecureString]$agent_password,
+    [string]$agent_password,
     [string]$agent_name, 
     [string]$agent_serverurl,
     [string]$agent_pool,
@@ -47,10 +47,9 @@ function DownloadAndUnzipAgent ([string]$url)
     Get-Date -Format 'dd.MM.yyyy H:mm:ss'
     Write-Output 'Remove all installation files'
     Remove-Item C:/install -Recurse -Force
-    
 }
 
-switch ($AgentType) 
+switch ($AgentType)
     { 
         'TFS' 
         {
@@ -78,8 +77,6 @@ switch ($AgentType)
             exit 1
         }
     }
-
-
 
 Get-Date -Format 'dd.MM.yyyy H:mm:ss'
 Write-Output 'Finishing script...' 
