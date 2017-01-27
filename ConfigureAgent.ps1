@@ -31,5 +31,3 @@ $process.Start() | Out-Null
 $process.WaitForExit()
 $process.StandardOutput.ReadToEnd()
 $process.StandardError.ReadToEnd()
-
-while ($true) { Start-Sleep 100000 } 
