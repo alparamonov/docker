@@ -16,7 +16,6 @@
 
 param (
     [string]$agent_username,  
-    [SecureString]$agent_password,
     [string]$agent_name, 
     [string]$agent_serverurl,
     [string]$agent_pool,
@@ -26,7 +25,7 @@ param (
 if ($agent_token -eq $null)
 {
     & "$env:SystemDrive\cfg\Configure-Agent.ps1" -agent_username $agent_username `
-        -agent_password $agent_password `
+        -agent_token $agent_token `
         -agent_name $agent_name `
         -agent_serverurl $agent_serverurl `
         -agent_pool $agent_pool 

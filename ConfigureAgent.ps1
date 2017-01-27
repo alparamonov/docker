@@ -16,11 +16,9 @@ param(
 
 $currentPath = (Get-Location).Path
 
-$encToken = [Convert]::ToBase64String([Text.Encoding]::ASCII.GetBytes(("{0}:{1}" -f "", $agent_token)))
-
 $pinfo = New-Object System.Diagnostics.ProcessStartInfo
 $pinfo.FileName = "c:\agent\config.cmd"
-$pinfo.Arguments = "--unattended", "--url $agent_serverurl", "--agent $agent_name", "--pool $agent_pool", "--auth PAT", "--token $encToken", "--runasservice"
+$pinfo.Arguments = "--unattended", "--url $agent_serverurl", "--agent $agent_name", "--pool $agent_pool", "--auth PAT", "--token $agent_token", "--runasservice"
 $pinfo.CreateNoWindow = $true
 $pinfo.UseShellExecute = $false
 $pinfo.CreateNoWindow = $true
@@ -34,4 +32,4 @@ $process.WaitForExit()
 $process.StandardOutput.ReadToEnd()
 $process.StandardError.ReadToEnd()
 
-while ($true) { Start-Sleep 10000 } 
+while ($true) { Start-Sleep 100000 } 
