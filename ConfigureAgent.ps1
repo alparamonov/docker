@@ -16,8 +16,22 @@ param(
 
 $currentPath = (Get-Location).Path
 
+#############################################################################################
+# WORKAROUND FOR ERROR:                                                                     #
+# Error: ENOENT: no such file or directory, lstat 'c:\ContainerMappedDirectories'           #
+# 		- Issue for volumes: https://github.com/docker/docker/issues/27537                  #
+#		- Issue node.js used in build tasks: https://github.com/nodejs/node/issues/8897     #
+#############################################################################################
+
+$agentTargetPath = 'c:\agent_copy'
+$agentVolumePath = 'c:\agent'
+mkdir $agentTargetPath
+Copy-Item "$agent_name\*" -Destination $agentTargetPath -Recurse
+
+#############################################################################################
+
 $pinfo = New-Object System.Diagnostics.ProcessStartInfo
-$pinfo.FileName = "c:\agent\config.cmd"
+$pinfo.FileName = "$agentTargetPath\config.cmd"
 $pinfo.Arguments = "--unattended", "--url $agent_serverurl", "--agent $agent_name", "--pool $agent_pool", "--auth PAT", "--token $agent_token", "--runasservice"
 $pinfo.CreateNoWindow = $true
 $pinfo.UseShellExecute = $false
