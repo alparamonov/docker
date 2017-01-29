@@ -26,7 +26,7 @@ $currentPath = (Get-Location).Path
 $agentTargetPath = 'c:\agent_copy'
 $agentVolumePath = 'c:\agent'
 mkdir $agentTargetPath
-Copy-Item "$agent_name\*" -Destination $agentTargetPath -Recurse
+Copy-Item "$agentVolumePath\*" -Destination $agentTargetPath -Recurse
 
 #############################################################################################
 
